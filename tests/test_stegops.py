@@ -1,5 +1,5 @@
 import pytest
-from stegops import read_image_binary, BMP_EXTENSION, is_valid_bmp_file
+from stegops import read_image_binary, BMP_EXTENSION, is_valid_bmp_file, open_bmp_image
 
 
 @pytest.mark.parametrize("file_name", ["", None, "/owl.bmp", "owl.jpg"])
@@ -21,3 +21,11 @@ def test_bmp_header_validation():
     result = is_valid_bmp_file(header_bytes)
 
     assert result
+
+
+def test_open_image():
+    filename = "/owl.bmp"
+
+    image = open_bmp_image(filename)
+
+    assert isinstance(image, list)
